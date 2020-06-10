@@ -1,3 +1,6 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
@@ -11,14 +14,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `iws` DEFAULT CHARACTER SET utf8 ;
 USE `iws` ;
 
--- -----------------------------------------------------
--- Table `iws`.`author`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `iws`.`author` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `author_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -39,17 +34,12 @@ CREATE TABLE IF NOT EXISTS `iws`.`news` (
   `title` VARCHAR(50) NOT NULL,
   `short_intro` VARCHAR(255) NOT NULL,
   `content` TEXT NOT NULL,
+  `author_name` varchar(25) not null,
   `date_created` DATETIME  DEFAULT CURRENT_TIMESTAMP()  NOT NULL ,
-  `author_id` INT NOT NULL,
   `category_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `author_id`, `category_id`),
-  INDEX `fk_news_author_idx` (`author_id` ASC),
+  PRIMARY KEY (`id`, `category_id`),
   INDEX `fk_news_category1_idx` (`category_id` ASC),
-  CONSTRAINT `fk_news_author`
-    FOREIGN KEY (`author_id`)
-    REFERENCES `iws`.`author` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+ 
   CONSTRAINT `fk_news_category1`
     FOREIGN KEY (`category_id`)
     REFERENCES `iws`.`category` (`id`)

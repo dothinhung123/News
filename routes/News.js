@@ -11,8 +11,8 @@ const addComment ="INSERT INTO `iws`.`comment` ( `comment`, `username`, `news_id
 const deleteComment = "delete from comment where id =? and news_id=?";
 const selectAllTags = "select tag.tag_name from tag inner join tag_has_news on tag.id = tag_has_news.tag_id where tag_has_news.news_id = ?;"
 const selectAllCommentsOfNews = "select comment.id ,comment.comment,comment.username,comment.date_created from comment  where comment.news_id=?;"
-const selectAllNews = "select news.id , news.title, news.content,news.short_intro, category.category_name,author.author_name,news.date_created from news inner join category on category.id = news.category_id inner join  author on author.id = news.author_id;"
-const selectNewsById = "select news.id , news.title, news.content, news.date_created, category.category_name,author.author_name from news inner join category on category.id = news.category_id inner join  author on author.id = news.author_id where news.id = ?;"
+const selectAllNews = "select news.id , news.title, news.content,news.short_intro, category.category_name,news.author_name,news.date_created from news inner join category on category.id = news.category_id ;"
+const selectNewsById = "select news.id , news.title, news.content, news.date_created, category.category_name,news.author_name from news inner join category on category.id = news.category_id where news.id = ?;"
 
 router.use(bodyParser.json())
 

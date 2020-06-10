@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 const selectAllCategory = "select * from category";
 selectCategoryById = "select * from category where id = ?"
-const selectAllNewInCategory ="select category.id , category.category_name , news.title, news.short_intro,news.date_created, author.author_name from category inner join news on news.category_id = category.id inner join author on author.id = news.author_id where category.id = ?;";
+const selectAllNewInCategory ="select category.id , category.category_name , news.title, news.short_intro,news.date_created, news.author_name from category inner join news on category.id = news.category_id where category.id = ?;";
 router.use(bodyParser.json())
 router.get('/',(req,res)=> connection.connect(function(){
     connection.query(selectAllCategory,function(err,result,fields){
